@@ -13,6 +13,7 @@ export const HookUseState = () =>{
         setCount(count + 1)
     }
     const restar = () =>{
+        if(count <= 0 ) return
         setCount(count - 1)
     }
     const reset = () =>{
