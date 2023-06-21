@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ContextApp } from "../../context/ContextApp";
+import { ModalProducts } from "../../components/ModalProducts";
 
 export const Dashboard = () => {
   const { nombreUsuario, addCart, cartItems, removeItem } = useContext(ContextApp);
@@ -35,10 +36,14 @@ export const Dashboard = () => {
     },
   ];
 
+
   return (
     <div>
       <div>Bienenido usuario {nombreUsuario}</div>
       <h1>PRODUCTOS A LA VENTA</h1>
+
+      <ModalProducts product={cartItems} />
+
       <div>
         RTUS PRODUCTOS
         {
