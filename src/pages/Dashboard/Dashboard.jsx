@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ContextApp } from "../../context/ContextApp";
 
 export const Dashboard = () => {
-  const { nombreUsuario } = useContext(ContextApp);
+  const { nombreUsuario, addCart, cartItems, removeItem } = useContext(ContextApp);
 
   const productos = [
     {
@@ -39,13 +39,29 @@ export const Dashboard = () => {
     <div>
       <div>Bienenido usuario {nombreUsuario}</div>
       <h1>PRODUCTOS A LA VENTA</h1>
+      <div>
+        RTUS PRODUCTOS
+        {
+          cartItems.length === 0 ? <div>No tienes productos</div> : (
+            cartItems.map((car)=>(
+              <div style={{display: "flex"}}>
+                <img src={car.img} alt="" width={100} height={100} />
+                <h1>{car.name}</h1>
+                <p>{car.cantidad}</p>
+                <button onClick={()=>removeItem(car.id)}>Eliminar Productos</button>
+              </div>
+            ))
+          )
+        }
+      </div>
       <div style={{display: "flex", gap: "20px"}}>
         {productos.map((prod) => (
-          <div style={{border: "1px solid black", padding: "10px"}}>
+          <div key={prod.id} style={{border: "1px solid black", padding: "10px"}}>
             <img src={prod.img} alt="" width={200} height={200} />
             <h2>{prod.name}</h2>
             <p>Precio: {prod.precio}</p>
             <p>Fecha Vencimiento: {prod.fechaVencimiento}</p>
+            <button onClick={()=>addCart(prod)}>AGREGAR CARRITO</button>
           </div>
         ))}
       </div>
